@@ -1,0 +1,119 @@
+1. SELECT * FROM Products;
++------------+--------------+-------------+------------+
+| product_id | product_name | category    | unit_price |
++------------+--------------+-------------+------------+
+|        101 | Laptop       | Electronics |     500.00 |
+|        102 | Smartphone   | Electronics |     300.00 |
+|        103 | Headphones   | Electronics |      30.00 |
+|        104 | Keyboard     | Electronics |      20.00 |
+|        105 | Mouse        | Electronics |      15.00 |
++------------+--------------+-------------+------------+
+5 rows in set (0.00 sec)
+
+2. SELECT product_name, unit_price FROM Products;
++--------------+------------+
+| product_name | unit_price |
++--------------+------------+
+| Laptop       |     500.00 |
+| Smartphone   |     300.00 |
+| Headphones   |      30.00 |
+| Keyboard     |      20.00 |
+| Mouse        |      15.00 |
++--------------+------------+
+5 rows in set (0.00 sec)
+
+3. SELECT * FROM Products WHERE category= 'Electronics';
++------------+--------------+-------------+------------+
+| product_id | product_name | category    | unit_price |
++------------+--------------+-------------+------------+
+|        101 | Laptop       | Electronics |     500.00 |
+|        102 | Smartphone   | Electronics |     300.00 |
+|        103 | Headphones   | Electronics |      30.00 |
+|        104 | Keyboard     | Electronics |      20.00 |
+|        105 | Mouse        | Electronics |      15.00 |
++------------+--------------+-------------+------------+
+5 rows in set (0.00 sec)
+
+4. SELECT product_id, product_name FROM Products WHERE unit_price>100;
++------------+--------------+
+| product_id | product_name |
++------------+--------------+
+|        101 | Laptop       |
+|        102 | Smartphone   |
++------------+--------------+
+2 rows in set (0.00 sec)
+
+5. SELECT avg(unit_price) FROM Products;
++-----------------+
+| avg(unit_price) |
++-----------------+
+|      173.000000 |
++-----------------+
+1 row in set (0.00 sec)
+
+6. SELECT * FROM Products ORDER BY unit_price desc;
++------------+--------------+-------------+------------+
+| product_id | product_name | category    | unit_price |
++------------+--------------+-------------+------------+
+|        101 | Laptop       | Electronics |     500.00 |
+|        102 | Smartphone   | Electronics |     300.00 |
+|        103 | Headphones   | Electronics |      30.00 |
+|        104 | Keyboard     | Electronics |      20.00 |
+|        105 | Mouse        | Electronics |      15.00 |
++------------+--------------+-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products
+    -> LIMIT 1;
++------------+--------------+-------------+------------+
+| product_id | product_name | category    | unit_price |
++------------+--------------+-------------+------------+
+|        101 | Laptop       | Electronics |     500.00 |
++------------+--------------+-------------+------------+
+1 row in set (0.00 sec)
+
+7.SELECT * FROM Products ORDER BY unit_price desc;
++------------+--------------+-------------+------------+
+| product_id | product_name | category    | unit_price |
++------------+--------------+-------------+------------+
+|        101 | Laptop       | Electronics |     500.00 |
+|        102 | Smartphone   | Electronics |     300.00 |
+|        103 | Headphones   | Electronics |      30.00 |
+|        104 | Keyboard     | Electronics |      20.00 |
+|        105 | Mouse        | Electronics |      15.00 |
++------------+--------------+-------------+------------+
+5 rows in set (0.00 sec)
+
+SELECT product_name, unit_price FROM Products;
++--------------+------------+
+| product_name | unit_price |
++--------------+------------+
+| Laptop       |     500.00 |
+| Smartphone   |     300.00 |
+| Headphones   |      30.00 |
+| Keyboard     |      20.00 |
+| Mouse        |      15.00 |
++--------------+------------+
+5 rows in set (0.00 sec) 
+
+8. SELECT product_name, unit_price FROM Products WHERE unit_price>20 and unit_price< 600;
++--------------+------------+
+| product_name | unit_price |
++--------------+------------+
+| Laptop       |     500.00 |
+| Smartphone   |     300.00 |
+| Headphones   |      30.00 |
++--------------+------------+
+3 rows in set (0.00 sec)
+
+9. SELECT product_name FROM Products ORDER BY category;
++--------------+
+| product_name |
++--------------+
+| Laptop       |
+| Smartphone   |
+| Headphones   |
+| Keyboard     |
+| Mouse        |
++--------------+
+5 rows in set (0.00 sec)

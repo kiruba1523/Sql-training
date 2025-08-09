@@ -1,0 +1,227 @@
+1. SELECT Salesperson, SUM(Quantity) FROM Sales GROUP BY Salesperson;
++-------------+---------------+
+| Salesperson | SUM(Quantity) |
++-------------+---------------+
+| Alice       |             6 |
+| Bob         |             5 |
+| Charlie     |             5 |
+| David       |             5 |
+| Eve         |             6 |
++-------------+---------------+
+5 rows in set (0.00 sec)
+
+2. SELECT Salesperson, SUM(Quantity) FROM Sales GROUP BY Salesperson HAVING SUM(Quantity) > 5;
++-------------+---------------+
+| Salesperson | SUM(Quantity) |
++-------------+---------------+
+| Alice       |             6 |
+| Eve         |             6 |
++-------------+---------------+
+2 rows in set (0.00 sec)
+
+3. SELECT salesperson, count(product) FROM sales GROUP BY salesperson;
++-------------+----------------+
+| salesperson | count(product) |
++-------------+----------------+
+| Alice       |              4 |
+| Bob         |              3 |
+| Charlie     |              3 |
+| David       |              2 |
+| Eve         |              3 |
++-------------+----------------+
+5 rows in set (0.00 sec)
+
+4. SELECT region FROM sales WHERE saleamount>1000;
++--------+
+| region |
++--------+
+| East   |
+| West   |
+| South  |
++--------+
+3 rows in set (0.00 sec)
+
+5. SELECT salesperson, COUNT(Product) FROM sales GROUP BY salesperson HAVING COUNT(Product) >2;
++-------------+----------------+
+| salesperson | COUNT(Product) |
++-------------+----------------+
+| Alice       |              4 |
+| Bob         |              3 |
+| Charlie     |              3 |
+| Eve         |              3 |
++-------------+----------------+
+4 rows in set (0.00 sec)
+
+6. SELECT product, SUM(saleamount) FROM sales GROUP BY product HAVING SUM(saleamount)> 500 and SUM(saleamount)<1500;
++---------+-----------------+
+| product | SUM(saleamount) |
++---------+-----------------+
+| Monitor |          900.00 |
++---------+-----------------+
+1 row in set (0.00 sec)
+
+7. SELECT product, region, SUM(quantity) FROM sales GROUP BY region, product;
++----------+--------+---------------+
+| product  | region | SUM(quantity) |
++----------+--------+---------------+
+| Laptop   | North  |             1 |
+| Mouse    | South  |             4 |
+| Monitor  | North  |             2 |
+| Keyboard | East   |             1 |
+| Monitor  | South  |             4 |
+| Mouse    | North  |             2 |
+| Laptop   | East   |             2 |
+| Laptop   | West   |             1 |
+| Mouse    | West   |             4 |
+| Keyboard | South  |             2 |
+| Keyboard | North  |             1 |
+| Laptop   | South  |             1 |
+| Mouse    | East   |             2 |
++----------+--------+---------------+
+13 rows in set (0.00 sec)
+
+8. SELECT salesperson, count(product) FROM sales GROUP BY salesperson HAVING count(product) >1;
++-------------+----------------+
+| salesperson | count(product) |
++-------------+----------------+
+| Alice       |              4 |
+| Bob         |              3 |
+| Charlie     |              3 |
+| David       |              2 |
+| Eve         |              3 |
++-------------+----------------+
+5 rows in set (0.00 sec)
+
+9. SELECT product, region, avg(quantity) FROM sales GROUP BY region, product HAVING avg(quantity)>1;
++----------+--------+---------------+
+| product  | region | avg(quantity) |
++----------+--------+---------------+
+| Mouse    | South  |        2.0000 |
+| Monitor  | North  |        2.0000 |
+| Monitor  | South  |        2.0000 |
+| Mouse    | North  |        2.0000 |
+| Laptop   | East   |        2.0000 |
+| Mouse    | West   |        4.0000 |
+| Keyboard | South  |        2.0000 |
+| Mouse    | East   |        2.0000 |
++----------+--------+---------------+
+8 rows in set (0.00 sec)
+
+10. SELECT salesperson, SUM(saleamount) FROM sales GROUP BY salesperson HAVING SUM(saleamount)>500 and SUM(saleamount)<1500;
++-------------+-----------------+
+| salesperson | SUM(saleamount) |
++-------------+-----------------+
+| Alice       |         1410.00 |
+| Bob         |         1425.00 |
+| David       |         1200.00 |
+| Eve         |          575.00 |
++-------------+-----------------+
+4 rows in set (0.00 sec)
+
+11. SELECT product, sum(quantity) FROM sales GROUP BY product HAVING sum(quantity) > 3;
++----------+---------------+
+| product  | sum(quantity) |
++----------+---------------+
+| Laptop   |             5 |
+| Mouse    |            12 |
+| Monitor  |             6 |
+| Keyboard |             4 |
++----------+---------------+
+4 rows in set (0.00 sec)
+
+12. SELECT distinct(salesperson) FROM sales WHERE product= 'Laptop';
++-------------+
+| salesperson |
++-------------+
+| Alice       |
+| Charlie     |
+| David       |
+| Bob         |
++-------------+
+4 rows in set (0.00 sec)
+
+13. SELECT salesperson, region, SUM(saleamount) FROM sales GROUP BY salesperson, region HAVING SUM(saleamount) >500;
++-------------+--------+-----------------+
+| salesperson | region | SUM(saleamount) |
++-------------+--------+-----------------+
+| Alice       | North  |         1410.00 |
+| Bob         | South  |         1425.00 |
+| Charlie     | East   |         2100.00 |
+| David       | West   |         1200.00 |
+| Eve         | South  |          575.00 |
++-------------+--------+-----------------+
+5 rows in set (0.00 sec)
+
+14. SELECT salesperson, region, COUNT(product) FROM sales GROUP BY salesperson, region HAVING COUNT(product) >2;
++-------------+--------+----------------+
+| salesperson | region | COUNT(product) |
++-------------+--------+----------------+
+| Alice       | North  |              4 |
+| Bob         | South  |              3 |
+| Charlie     | East   |              3 |
+| Eve         | South  |              3 |
++-------------+--------+----------------+
+4 rows in set (0.00 sec)
+
+15. SELECT product, COUNT(region) FROM sales GROUP BY product HAVING COUNT(region)>1;
++----------+---------------+
+| product  | COUNT(region) |
++----------+---------------+
+| Laptop   |             4 |
+| Mouse    |             5 |
+| Monitor  |             3 |
+| Keyboard |             3 |
++----------+---------------+
+4 rows in set (0.00 sec)
+
+16. SELECT product, SUM(quantity) FROM sales GROUP BY product HAVING SUM(quantity)>2;
++----------+---------------+
+| product  | SUM(quantity) |
++----------+---------------+
+| Laptop   |             5 |
+| Mouse    |            12 |
+| Monitor  |             6 |
+| Keyboard |             4 |
++----------+---------------+
+4 rows in set (0.00 sec)
+
+17. SELECT region, salesperson, SUM(quantity) FROM sales GROUP BY region, salesperson;
++--------+-------------+---------------+
+| region | salesperson | SUM(quantity) |
++--------+-------------+---------------+
+| North  | Alice       |             6 |
+| South  | Bob         |             5 |
+| East   | Charlie     |             5 |
+| West   | David       |             5 |
+| South  | Eve         |             6 |
++--------+-------------+---------------+
+5 rows in set (0.00 sec)
+
+18. SELECT salesperson FROM sales GROUP BY salesperson HAVING SUM(saleamount) > 1000 AND COUNT(quantity) > 3;
++-------------+
+| salesperson |
++-------------+
+| Alice       |
++-------------+
+1 row in set (0.00 sec)
+
+19. SELECT region FROM sales GROUP BY region HAVING AVG(saleamount) > 200;
++--------+
+| region |
++--------+
+| North  |
+| South  |
+| East   |
+| West   |
++--------+
+4 rows in set (0.00 sec)
+
+20. SELECT region, product FROM sales GROUP BY region, product HAVING SUM(quantity) > 3;
++--------+---------+
+| region | product |
++--------+---------+
+| South  | Mouse   |
+| South  | Monitor |
+| West   | Mouse   |
++--------+---------+
+3 rows in set (0.00 sec)

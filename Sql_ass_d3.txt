@@ -1,0 +1,372 @@
+1. SELECT user_name, reaction_type FROM reaction WHERE reaction_type LIKE 'a%';
++-----------+---------------+
+| user_name | reaction_type |
++-----------+---------------+
+| Charlie   | angry         |
+| Ian       | angry         |
+| Daniel    | angry         |
++-----------+---------------+
+3 rows in set (0.00 sec)
+
+2. SELECT user_name AS Reactor, reaction_type AS Type FROM reaction;
++-----------+-------+
+| Reactor   | Type  |
++-----------+-------+
+| Alice     | like  |
+| Bob       | love  |
+| Charlie   | angry |
+| Diana     | wow   |
+| Ethan     | sad   |
+| Fiona     | love  |
+| George    | like  |
+| Hannah    | like  |
+| Ian       | angry |
+| Jane      | sad   |
+| Sam       | like  |
+| Anita     | wow   |
+| Brian     | love  |
+| Catherine | like  |
+| Daniel    | angry |
++-----------+-------+
+15 rows in set (0.00 sec)
+
+3. SELECT reaction_type FROM reaction WHERE mood_level BETWEEN '4' and '8';
++---------------+
+| reaction_type |
++---------------+
+| like          |
+| wow           |
+| love          |
+| like          |
+| angry         |
+| like          |
+| wow           |
+| like          |
++---------------+
+8 rows in set (0.00 sec)
+
+4. SELECT * FROM reaction WHERE reaction_type = 'like' and mood_level>7;
++----+-----------+---------------+---------+---------------------+----------+------------+-------------------+
+| id | user_name | reaction_type | post_id | created_at          | location | mood_level | comment           |
++----+-----------+---------------+---------+---------------------+----------+------------+-------------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York |          8 | Nice post!        |
+|  8 | Hannah    | like          |     106 | 2025-08-07 15:50:00 | Denver   |          9 | Completely agree! |
+| 11 | Sam       | like          |     101 | 2025-08-07 10:50:00 | New York |          8 | ???               |
++----+-----------+---------------+---------+---------------------+----------+------------+-------------------+
+3 rows in set (0.00 sec)
+
+5. SELECT * FROM reaction  WHERE reaction_type= 'like' or reaction_type= 'angry';
++----+-----------+---------------+---------+---------------------+----------+------------+---------------------+
+| id | user_name | reaction_type | post_id | created_at          | location | mood_level | comment             |
++----+-----------+---------------+---------+---------------------+----------+------------+---------------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York |          8 | Nice post!          |
+|  3 | Charlie   | angry         |     101 | 2025-08-05 09:10:00 | Chicago  |          3 | NULL                |
+|  7 | George    | like          |     105 | 2025-08-03 11:25:00 | Seattle  |          5 | NULL                |
+|  8 | Hannah    | like          |     106 | 2025-08-07 15:50:00 | Denver   |          9 | Completely agree!   |
+|  9 | Ian       | angry         |     107 | 2025-08-06 13:15:00 | Phoenix  |          4 | Not okay with this. |
+| 11 | Sam       | like          |     101 | 2025-08-07 10:50:00 | New York |          8 | ???                 |
+| 14 | Catherine | like          |     111 | 2025-08-07 08:55:00 | New York |          6 | NULL                |
+| 15 | Daniel    | angry         |     112 | 2025-08-05 17:35:00 | Chicago  |          2 | NULL                |
++----+-----------+---------------+---------+---------------------+----------+------------+---------------------+
+8 rows in set (0.00 sec)
+
+6. SELECT * FROM reaction WHERE reaction_type != 'sad';
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+| id | user_name | reaction_type | post_id | created_at          | location      | mood_level | comment             |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York      |          8 | Nice post!          |
+|  2 | Bob       | love          |     102 | 2025-08-06 14:20:00 | Los Angeles   |          9 | Awesome!            |
+|  3 | Charlie   | angry         |     101 | 2025-08-05 09:10:00 | Chicago       |          3 | NULL                |
+|  4 | Diana     | wow           |     103 | 2025-08-07 08:30:00 | Miami         |          7 | Interesting point.  |
+|  6 | Fiona     | love          |     102 | 2025-08-07 12:00:00 | Boston        |          6 | Well said.          |
+|  7 | George    | like          |     105 | 2025-08-03 11:25:00 | Seattle       |          5 | NULL                |
+|  8 | Hannah    | like          |     106 | 2025-08-07 15:50:00 | Denver        |          9 | Completely agree!   |
+|  9 | Ian       | angry         |     107 | 2025-08-06 13:15:00 | Phoenix       |          4 | Not okay with this. |
+| 11 | Sam       | like          |     101 | 2025-08-07 10:50:00 | New York      |          8 | ???                 |
+| 12 | Anita     | wow           |     109 | 2025-08-01 20:10:00 | Houston       |          7 | NULL                |
+| 13 | Brian     | love          |     110 | 2025-08-07 09:05:00 | San Francisco |         10 | Fantastic work!     |
+| 14 | Catherine | like          |     111 | 2025-08-07 08:55:00 | New York      |          6 | NULL                |
+| 15 | Daniel    | angry         |     112 | 2025-08-05 17:35:00 | Chicago       |          2 | NULL                |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+13 rows in set (0.00 sec)
+
+7. SELECT * FROM reaction WHERE reaction_type IN('like', 'wow', 'love');
++----+-----------+---------------+---------+---------------------+---------------+------------+--------------------+
+| id | user_name | reaction_type | post_id | created_at          | location      | mood_level | comment            |
++----+-----------+---------------+---------+---------------------+---------------+------------+--------------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York      |          8 | Nice post!         |
+|  2 | Bob       | love          |     102 | 2025-08-06 14:20:00 | Los Angeles   |          9 | Awesome!           |
+|  4 | Diana     | wow           |     103 | 2025-08-07 08:30:00 | Miami         |          7 | Interesting point. |
+|  6 | Fiona     | love          |     102 | 2025-08-07 12:00:00 | Boston        |          6 | Well said.         |
+|  7 | George    | like          |     105 | 2025-08-03 11:25:00 | Seattle       |          5 | NULL               |
+|  8 | Hannah    | like          |     106 | 2025-08-07 15:50:00 | Denver        |          9 | Completely agree!  |
+| 11 | Sam       | like          |     101 | 2025-08-07 10:50:00 | New York      |          8 | ???                |
+| 12 | Anita     | wow           |     109 | 2025-08-01 20:10:00 | Houston       |          7 | NULL               |
+| 13 | Brian     | love          |     110 | 2025-08-07 09:05:00 | San Francisco |         10 | Fantastic work!    |
+| 14 | Catherine | like          |     111 | 2025-08-07 08:55:00 | New York      |          6 | NULL               |
++----+-----------+---------------+---------+---------------------+---------------+------------+--------------------+
+10 rows in set (0.00 sec)
+
+8. SELECT * FROM reaction WHERE comment IS NULL;
++----+-----------+---------------+---------+---------------------+----------+------------+---------+
+| id | user_name | reaction_type | post_id | created_at          | location | mood_level | comment |
++----+-----------+---------------+---------+---------------------+----------+------------+---------+
+|  3 | Charlie   | angry         |     101 | 2025-08-05 09:10:00 | Chicago  |          3 | NULL    |
+|  5 | Ethan     | sad           |     104 | 2025-08-04 16:45:00 | Dallas   |          2 | NULL    |
+|  7 | George    | like          |     105 | 2025-08-03 11:25:00 | Seattle  |          5 | NULL    |
+| 10 | Jane      | sad           |     108 | 2025-08-02 18:40:00 | Atlanta  |          1 | NULL    |
+| 12 | Anita     | wow           |     109 | 2025-08-01 20:10:00 | Houston  |          7 | NULL    |
+| 14 | Catherine | like          |     111 | 2025-08-07 08:55:00 | New York |          6 | NULL    |
+| 15 | Daniel    | angry         |     112 | 2025-08-05 17:35:00 | Chicago  |          2 | NULL    |
++----+-----------+---------------+---------+---------------------+----------+------------+---------+
+7 rows in set (0.00 sec)
+
+9. SELECT * FROM reaction WHERE comment IS NOT NULL;
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+| id | user_name | reaction_type | post_id | created_at          | location      | mood_level | comment             |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York      |          8 | Nice post!          |
+|  2 | Bob       | love          |     102 | 2025-08-06 14:20:00 | Los Angeles   |          9 | Awesome!            |
+|  4 | Diana     | wow           |     103 | 2025-08-07 08:30:00 | Miami         |          7 | Interesting point.  |
+|  6 | Fiona     | love          |     102 | 2025-08-07 12:00:00 | Boston        |          6 | Well said.          |
+|  8 | Hannah    | like          |     106 | 2025-08-07 15:50:00 | Denver        |          9 | Completely agree!   |
+|  9 | Ian       | angry         |     107 | 2025-08-06 13:15:00 | Phoenix       |          4 | Not okay with this. |
+| 11 | Sam       | like          |     101 | 2025-08-07 10:50:00 | New York      |          8 | ???                 |
+| 13 | Brian     | love          |     110 | 2025-08-07 09:05:00 | San Francisco |         10 | Fantastic work!     |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+8 rows in set (0.00 sec)
+
+10. SELECT UPPER(user_name) FROM reaction;
++------------------+
+| UPPER(user_name) |
++------------------+
+| ALICE            |
+| BOB              |
+| CHARLIE          |
+| DIANA            |
+| ETHAN            |
+| FIONA            |
+| GEORGE           |
+| HANNAH           |
+| IAN              |
+| JANE             |
+| SAM              |
+| ANITA            |
+| BRIAN            |
+| CATHERINE        |
+| DANIEL           |
++------------------+
+15 rows in set (0.01 sec)
+
+11. SELECT LOWER(user_name) FROM reaction;
++------------------+
+| LOWER(user_name) |
++------------------+
+| alice            |
+| bob              |
+| charlie          |
+| diana            |
+| ethan            |
+| fiona            |
+| george           |
+| hannah           |
+| ian              |
+| jane             |
+| sam              |
+| anita            |
+| brian            |
+| catherine        |
+| daniel           |
++------------------+
+15 rows in set (0.00 sec)
+
+12. SELECT user_name FROM reaction WHERE LENGTH(user_name) > 6;
++-----------+
+| user_name |
++-----------+
+| Charlie   |
+| Catherine |
++-----------+
+2 rows in set (0.00 sec)
+
+13. SELECT user_name FROM reaction WHERE DATE(created_at)= CURDATE();
++-----------+
+| user_name |
++-----------+
+| Alice     |
+| Diana     |
+| Fiona     |
+| Hannah    |
+| Sam       |
+| Brian     |
+| Catherine |
++-----------+
+7 rows in set (0.00 sec)
+
+14. SELECT DATE(created_at) FROM reaction;
++------------------+
+| DATE(created_at) |
++------------------+
+| 2025-08-07       |
+| 2025-08-06       |
+| 2025-08-05       |
+| 2025-08-07       |
+| 2025-08-04       |
+| 2025-08-07       |
+| 2025-08-03       |
+| 2025-08-07       |
+| 2025-08-06       |
+| 2025-08-02       |
+| 2025-08-07       |
+| 2025-08-01       |
+| 2025-08-07       |
+| 2025-08-07       |
+| 2025-08-05       |
++------------------+
+15 rows in set (0.00 sec)
+
+15. SELECT user_name FROM reaction WHERE user_name LIKE '%an%';
++-----------+
+| user_name |
++-----------+
+| Diana     |
+| Ethan     |
+| Hannah    |
+| Ian       |
+| Jane      |
+| Anita     |
+| Brian     |
+| Daniel    |
++-----------+
+8 rows in set (0.00 sec)
+
+16. SELECT SUBSTR(UPPER(user_name), 1, 2) FROM reaction;
++--------------------------------+
+| SUBSTR(UPPER(user_name), 1, 2) |
++--------------------------------+
+| AL                             |
+| BO                             |
+| CH                             |
+| DI                             |
+| ET                             |
+| FI                             |
+| GE                             |
+| HA                             |
+| IA                             |
+| JA                             |
+| SA                             |
+| AN                             |
+| BR                             |
+| CA                             |
+| DA                             |
++--------------------------------+
+15 rows in set (0.00 sec)
+
+17. SELECT * FROM reaction WHERE post_id NOT IN (10, 20, 30);
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+| id | user_name | reaction_type | post_id | created_at          | location      | mood_level | comment             |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+|  1 | Alice     | like          |     101 | 2025-08-07 10:15:00 | New York      |          8 | Nice post!          |
+|  2 | Bob       | love          |     102 | 2025-08-06 14:20:00 | Los Angeles   |          9 | Awesome!            |
+|  3 | Charlie   | angry         |     101 | 2025-08-05 09:10:00 | Chicago       |          3 | NULL                |
+|  4 | Diana     | wow           |     103 | 2025-08-07 08:30:00 | Miami         |          7 | Interesting point.  |
+|  5 | Ethan     | sad           |     104 | 2025-08-04 16:45:00 | Dallas        |          2 | NULL                |
+|  6 | Fiona     | love          |     102 | 2025-08-07 12:00:00 | Boston        |          6 | Well said.          |
+|  7 | George    | like          |     105 | 2025-08-03 11:25:00 | Seattle       |          5 | NULL                |
+|  8 | Hannah    | like          |     106 | 2025-08-07 15:50:00 | Denver        |          9 | Completely agree!   |
+|  9 | Ian       | angry         |     107 | 2025-08-06 13:15:00 | Phoenix       |          4 | Not okay with this. |
+| 10 | Jane      | sad           |     108 | 2025-08-02 18:40:00 | Atlanta       |          1 | NULL                |
+| 11 | Sam       | like          |     101 | 2025-08-07 10:50:00 | New York      |          8 | ???                 |
+| 12 | Anita     | wow           |     109 | 2025-08-01 20:10:00 | Houston       |          7 | NULL                |
+| 13 | Brian     | love          |     110 | 2025-08-07 09:05:00 | San Francisco |         10 | Fantastic work!     |
+| 14 | Catherine | like          |     111 | 2025-08-07 08:55:00 | New York      |          6 | NULL                |
+| 15 | Daniel    | angry         |     112 | 2025-08-05 17:35:00 | Chicago       |          2 | NULL                |
++----+-----------+---------------+---------+---------------------+---------------+------------+---------------------+
+15 rows in set (0.00 sec)
+
+18. SELECT COUNT(*) FROM reaction WHERE comment IS NULL;
++----------+
+| COUNT(*) |
++----------+
+|        7 |
++----------+
+1 row in set (0.00 sec)
+
+TABLE orders
+
+1. SELECT customer_name FROM orders WHERE customer_name LIKE '%a';
++---------------+
+| customer_name |
++---------------+
+| Diana         |
+| Fiona         |
++---------------+
+2 rows in set (0.00 sec)
+
+2. SELECT * FROM orders WHERE product_name LIKE 'Phone';
++----------+---------------+--------------+---------------------+----------+--------+---------+------------------+
+| order_id | customer_name | product_name | order_date          | quantity | price  | status  | shipping_address |
++----------+---------------+--------------+---------------------+----------+--------+---------+------------------+
+|        2 | Bob           | Phone        | 2025-08-06 14:10:00 |        2 | 650.50 | pending | 456 Elm St, LA   |
++----------+---------------+--------------+---------------------+----------+--------+---------+------------------+
+1 row in set (0.00 sec)
+
+3. SELECT * FROM orders WHERE customer_name LIKE '_____';
++----------+---------------+--------------+---------------------+----------+---------+------------+-----------------------+
+| order_id | customer_name | product_name | order_date          | quantity | price   | status     | shipping_address      |
++----------+---------------+--------------+---------------------+----------+---------+------------+-----------------------+
+|        1 | Alice         | Laptop       | 2025-08-07 09:00:00 |        1 | 1200.00 | shipped    | 123 Main St, New York |
+|        4 | Diana         | Monitor      | 2025-08-07 15:40:00 |        3 |  199.99 | shipped    | 789 Pine St, Chicago  |
+|        5 | Ethan         | Keyboard     | 2025-08-03 08:20:00 |        5 |   49.99 | processing | NULL                  |
+|        6 | Fiona         | Mouse        | 2025-08-04 10:30:00 |        4 |   25.00 | shipped    | 321 Oak St, Houston   |
++----------+---------------+--------------+---------------------+----------+---------+------------+-----------------------+
+4 rows in set (0.00 sec)
+
+4. SELECT customer_name AS Buyer, price AS Unit_Price FROM orders;
++---------+------------+
+| Buyer   | Unit_Price |
++---------+------------+
+| Alice   |    1200.00 |
+| Bob     |     650.50 |
+| Charlie |     300.00 |
+| Diana   |     199.99 |
+| Ethan   |      49.99 |
+| Fiona   |      25.00 |
++---------+------------+
+6 rows in set (0.00 sec)
+
+5. SELECT order_id, quantity*price AS Total_Cost FROM orders;
++----------+------------+
+| order_id | Total_Cost |
++----------+------------+
+|        1 |    1200.00 |
+|        2 |    1301.00 |
+|        3 |     300.00 |
+|        4 |     599.97 |
+|        5 |     249.95 |
+|        6 |     100.00 |
++----------+------------+
+6 rows in set (0.00 sec)
+
+6. SELECT * FROM orders WHERE customer_name NOT IN('Bob');
++----------+---------------+--------------+---------------------+----------+---------+------------+-----------------------+
+| order_id | customer_name | product_name | order_date          | quantity | price   | status     | shipping_address      |
++----------+---------------+--------------+---------------------+----------+---------+------------+-----------------------+
+|        1 | Alice         | Laptop       | 2025-08-07 09:00:00 |        1 | 1200.00 | shipped    | 123 Main St, New York |
+|        3 | Charlie       | Tablet       | 2025-08-05 11:25:00 |        1 |  300.00 | cancelled  | NULL                  |
+|        4 | Diana         | Monitor      | 2025-08-07 15:40:00 |        3 |  199.99 | shipped    | 789 Pine St, Chicago  |
+|        5 | Ethan         | Keyboard     | 2025-08-03 08:20:00 |        5 |   49.99 | processing | NULL                  |
+|        6 | Fiona         | Mouse        | 2025-08-04 10:30:00 |        4 |   25.00 | shipped    | 321 Oak St, Houston   |
++----------+---------------+--------------+---------------------+----------+---------+------------+-----------------------+
+5 rows in set (0.00 sec)
+
+7. SELECT * FROM orders WHERE status NOT IN('Shipped');
++----------+---------------+--------------+---------------------+----------+--------+------------+------------------+
+| order_id | customer_name | product_name | order_date          | quantity | price  | status     | shipping_address |
++----------+---------------+--------------+---------------------+----------+--------+------------+------------------+
+|        2 | Bob           | Phone        | 2025-08-06 14:10:00 |        2 | 650.50 | pending    | 456 Elm St, LA   |
+|        3 | Charlie       | Tablet       | 2025-08-05 11:25:00 |        1 | 300.00 | cancelled  | NULL             |
+|        5 | Ethan         | Keyboard     | 2025-08-03 08:20:00 |        5 |  49.99 | processing | NULL             |
++----------+---------------+--------------+---------------------+----------+--------+------------+------------------+
+3 rows in set (0.00 sec)
+
